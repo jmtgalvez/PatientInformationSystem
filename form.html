@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Patient Information System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+    <style>
+        main { padding: 50px 5%;}
+        .form-field > label, #gender-label { color: #498881;}
+        .current-symptoms,
+        .submit-reset {
+            grid-template-columns: 1fr 1fr;
+        }
+        .hidden { display: none;}
+
+        @media screen and (min-width: 1280px) {
+            .add-patient { width: 100%;}
+            form { grid-template-columns: repeat(12, minmax(0, 1fr));}
+            .name, .details { grid-column: span 4;}
+            .address { grid-column: span 3;}
+            .full-address, .medical-history { grid-column: 1/-1;}
+            .medical-history {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                justify-content: space-around;
+                align-items: center;
+            }
+            .medical-history > * { flex: 1 1 30%;}
+            #history { grid-row: 1/-1;}
+            .checkboxes {
+                grid-column: 2/4;
+                max-height: 6em;
+
+                display: flex;
+                flex-flow: column wrap;
+            }
+            .current-symptoms { grid-column: 1/6;}
+            .medications-form { grid-column: 8/13;}
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+
+    <main>
+        <div class="add-patient card">
+            <h1>Patient Form</h1>
+            <p>Required fields are marked by *.</p>
+            <p id="error"></p>
+            <form>
+                <div class="form-field name">
+                    <label for="firstname">First Name*</label>
+                    <input type="text" name="firstname" id="firstname" required>
+                </div>
+
+                <div class="form-field name">
+                    <label for="middlename">Middle Name</label>
+                    <input type="text" name="middlename" id="middlename">
+                </div>
+
+                <div class="form-field name">
+                    <label for="lastname">Last Name*</label>
+                    <input type="text" name="lastname" id="lastname" required>
+                </div>
+
+                <div class="form-field address">
+                    <label for="region">Region*</label>
+                    <select name="region" id="region" required>
+                        <option value="null" disabled selected>Select Region</option>
+                    </select>
+                </div>
+
+                <div class="form-field address">
+                    <label for="province">Province*</label>
+                    <select name="province" id="province" disabled>
+                        <option value="null" disabled selected>Select Province</option>
+                    </select>
+                </div>
+
+                <div class="form-field address">
+                    <label for="city">City*</label>
+                    <select name="city" id="city" disabled required>
+                        <option value="null" disabled selected>Select City</option>
+                    </select>
+                </div>
+
+                <div class="form-field address">
+                    <label for="barangay">Barangay</label>
+                    <select name="barangay" id="barangay" disabled required>
+                        <option value="null" disabled selected>Select Barangay</option>
+                    </select>
+                </div>
+
+                <div class="form-field full-address">
+                    <label for="address">Street Address*</label>
+                    <input type="text" name="address" id="address">
+                </div>
+
+                <div class="form-field details">
+                    <label for="birthdate">Birthdate*</label>
+                    <input type="date" name="birthdate" id="birthdate" required>
+                </div>
+
+                <div class="form-field details">
+                    <label for="contact">Contact No*</label>
+                    <input type="text" name="contact" id="contact" placeholder="(e.g.0912-3093-345)" maxlength="13" required pattern="\d{4}-\d{4}-\d{3}" oninvalid="this.setCustomValidity('Please match this format: 0912-3093-345')">
+                </div>
+
+                <div class="details">
+                    <label for="gender" id="gender-label">Gender:*</label>
+                    <input type="radio" name="gender" id="male" value="M" required>
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="F">
+                    <label for="female">Female</label>
+                </div>
+
+                <div class="form-field medical-history">
+                    <label for="history" id="history">Medical History:</label>
+                    <div class="checkboxes">
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="asthma" value="asthma">
+                            <label for="asthma">Asthma</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="cancer" value="cancer">
+                            <label for="cancer">Cancer</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="cardiac" value="cardiac">
+                            <label for="cardiac">Cardiac Disease</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="diabetes" value="diabetes">
+                            <label for="diabetes">Diabetes</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="hypertension" value="hypertension">
+                            <label for="hypertension">Hypertension</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="psychiatric" value="psychiatric">
+                            <label for="psychiatric">Psychiatric Disorder</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="epilepsy" value="epilepsy">
+                            <label for="epilepsy">Epilepsy</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="history" id="others" value="others">
+                            <label for="others">Others:</label>
+                            <input type="text" name="others-field" id="others-field" class="hidden" placeholder="Please specificy here">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-field current-symptoms">
+                    <label for="symptoms">Current Symptoms:</label>
+                    <select name="symptoms" id="symptoms" multiple>
+                        <option value="chest pain">Chest Pain</option>
+                        <option value="respiratory">Respiratory</option>
+                        <option value="hematological">Hematological</option>
+                        <option value="lymphatic">Lymphatic</option>
+                        <option value="neurological">Neurological</option>
+                    </select>
+                </div>
+
+                <div class="form-field medications-form">
+                    <label for="medication">Are you currently taking medication?</label>
+                    <div><input type="radio" name="taking-meds" id="taking-meds-yes" value="yes">Yes</div>
+                    <div><input type="radio" name="taking-meds" id="taking-meds-no" value="no">No</div>
+                    <input type="text" name="medications" id="medications" disabled>
+                </div>
+
+                <div class="form-field submit-reset">
+                    <input type="submit" value="Add Patient">
+                    <input type="reset" value="Clear Form">
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Miguel Galvez 2022
+    </footer>
+
+    <script src="js/region.js"></script>
+    <script src="js/province.js"></script>
+    <script src="js/cities.js"></script>
+    <script src="js/brgy.js"></script>
+    <script src="js/address.js"></script>
+    <script>
+        const TODAY = new Date();
+        const STORAGE_KEY = 'patientsList'
+        let patients = [];
+
+        window.onload = () => {
+            let patientsData = localStorage.getItem(STORAGE_KEY);
+            patients = patientsData ? JSON.parse(patientsData) : [];
+
+            let $addPatientForm = document.querySelector('.add-patient > form');
+
+            $addPatientForm.onsubmit = addPatient;
+            $addPatientForm.onreset = resetForm;
+
+            document.querySelector('#birthdate').max = TODAY.toISOString().split("T")[0];
+            document.querySelector('#others').onchange = () => {
+                document.querySelector('#others-field').classList.toggle('hidden');
+            }
+            document.querySelector('#taking-meds-yes').onchange = () => {
+                document.querySelector('#medications').disabled = false;
+                document.querySelector('#medications').required = true;
+                console.log(document.querySelector('#taking-meds-yes').checked)
+            }
+            document.querySelector('#taking-meds-no').onchange = () => {
+                document.querySelector('#medications').value = null;
+                document.querySelector('#medications').disabled = true;
+                document.querySelector('#medications').required = false;
+
+            }
+        }
+
+        function addPatient(e) {
+            e.preventDefault();
+            let $firstname = document.querySelector('#firstname');
+            let $middlename = document.querySelector('#middlename');
+            let $lastname = document.querySelector('#lastname');
+            let $region = document.querySelector('#region');
+            let $province = document.querySelector('#province');
+            let $city = document.querySelector('#city');
+            let $barangay = document.querySelector('#barangay');
+            let $address = document.querySelector('#address');
+            let $birthdate = document.querySelector('#birthdate');
+            let $contact = document.querySelector('#contact');
+            let $gender = Array.from(document.getElementsByName('gender'))
+                                  .filter( gender => gender.checked == true )
+                                  .map( gender => gender.value );
+            let $history = Array.from(document.getElementsByName('history'))
+                                   .filter( history => history.checked )
+                                   .map( history => {
+                                        if (history.value == 'others') return document.querySelector('#others-field').value;
+                                        else return history.value;
+                                   });
+            let $symptoms = [...symptoms.options]
+                                    .filter( symptom => symptom.selected == true )
+                                    .map( symptom => symptom.value);
+            let $medications = document.querySelector('#medications');
+
+            const NEW_PATIENT = {
+                firstname: $firstname.value,
+                middlename: $middlename.value,
+                lastname: $lastname.value,
+                region: getRegNameByCode($region.value),
+                province: getProvNameByCode($province.value),
+                city: getCityNameByCode($city.value),
+                barangay: getBrgyNameByCode($barangay.value),
+                address: $address.value,
+                birthdate: $birthdate.value,
+                contact: $contact.value,
+                gender: $gender[0],
+                history: $history,
+                symptoms: $symptoms,
+                medications: $medications.value
+            }
+
+            patients.push(NEW_PATIENT);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(patients));
+            window.location = 'home.html';
+
+            // let incompleteForm = false;
+            // if ($firstname.value == '') {
+            //     $firstname.style.borderColor = 'red';
+            //     incompleteForm = true;
+            // }
+            // if ($lastname.value == '') $lastname.style.borderColor = 'red'; incompleteForm = true;
+            // if ($region.value == '') $region.style.borderColor = 'red';
+            // if ($province.value == '') $province.style.borderColor = 'red';
+            // if ($city.value == '') $city.style.borderColor = 'red';
+            // if ($address.value == '') $address.style.borderColor = 'red';
+            // if ($birthdate.value == '') $birthdate.style.borderColor = 'red';
+            // if ($contact.value == '') $contact.style.borderColor = 'red';
+            // if ($gender.value == '') $gender.style.borderColor = 'red';
+            // if (incompleteForm) error('Please fillup all required fields.');
+        }
+
+        function resetForm(e) {
+            clearAddress();
+            initializeAddress();
+        }
+
+        function error(message) {
+            let $error = document.querySelector('#error');
+            $error.textContent = message;
+            $error.style.display = block;
+        }
+        
+    </script>
+</body>
+</html>

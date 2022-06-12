@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Patient Information System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .card { padding: 1em;}
+        main { 
+            max-width: 100%;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+        tr:not(:last-child) { border-bottom: 1px solid black;}
+        tr:nth-child(2n) { background-color: #cdcdcd;}
+        form input[type="submit"] {
+            padding: 0.5em 1em;
+            border: 1px solid #b8e7e2;
+            border-radius: 0.5em;
+            cursor: pointer;
+            margin: auto;
+            width: fit-content;
+            background-color: #73d5ca;
+        }
+
+        @media screen and (min-width: 768px) {
+            main { justify-content: center;}
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+
+    <main>
+        <div class="card">
+            <table id="patients-table" cellpadding="20">
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Contact No.</th>
+                    <th>Medical History</th>
+                    <th>Symptoms</th>
+                    <th>Medications</th>
+                </tr>
+            </table>
+
+            <br>
+
+            <form action="/form.html">
+                <input type="submit" value="Add Patient">
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Miguel Galvez 2022
+    </footer>
+
+    <script>
+        const TODAY = new Date();
+
+        window.onload = () => {
+            let storageKey = 'patientsList';
+            let patientsData = localStorage.getItem(storageKey);
+            let patients = patientsData ? JSON.parse(patientsData) : [];
+            let $patientsTable = document.querySelector('#patients-table');
+
+            patients.forEach( patient => {
+                let $tr = document.createElement('tr');
+
+                let $td = document.createElement('td');
+                $td.textContent = `${patient.lastname}, ${patient.firstname} ${patient.middlename}`
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${Math.floor((TODAY - new Date(patient.birthdate))/1000/60/60/24/365)}`;
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${patient.gender}`;
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${patient.contact}`;
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${patient.history.toString()}`;
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${patient.symptoms.toString()}`;
+                $tr.appendChild($td);
+
+                $td = document.createElement('td');
+                $td.textContent = `${patient.medications}`;
+                $tr.appendChild($td);
+
+                $patientsTable.appendChild($tr);
+            })
+        }
+    </script>
+</body>
+</html>
