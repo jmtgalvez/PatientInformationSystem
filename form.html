@@ -109,7 +109,7 @@
 
                 <div class="form-field details">
                     <label for="contact">Contact No*</label>
-                    <input type="text" name="contact" id="contact" placeholder="(e.g.0912-3093-345)" maxlength="13" required pattern="\d{4}-\d{4}-\d{3}" oninvalid="this.setCustomValidity('Please match this format: 0912-3093-345')">
+                    <input type="text" name="contact" id="contact" placeholder="(e.g.0912-3093-345)" maxlength="13" required pattern="\d{4}-\d{4}-\d{3}" oninvalid="this.setCustomValidity('Please match this format: 0912-3093-345')" oninput="this.setCustomValidity('')">
                 </div>
 
                 <div class="details">
@@ -224,8 +224,12 @@
                 document.querySelector('#medications').value = null;
                 document.querySelector('#medications').disabled = true;
                 document.querySelector('#medications').required = false;
-
             }
+            // let $contact = document.querySelector('#contact');
+            // $contact.onchange = () => {
+            //     $contact.setCustomValidity("");
+            //     $contact.setAttribute('isvalid', 'true');
+            // }
         }
 
         function addPatient(e) {
@@ -261,7 +265,7 @@
                 region: getRegNameByCode($region.value),
                 province: getProvNameByCode($province.value),
                 city: getCityNameByCode($city.value),
-                barangay: getBrgyNameByCode($barangay.value),
+                barangay: $barangay.value != 'null' ? getBrgyNameByCode($barangay.value) : null,
                 address: $address.value,
                 birthdate: $birthdate.value,
                 contact: $contact.value,
