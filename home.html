@@ -17,7 +17,7 @@
         }
         tr:not(:last-child) { border-bottom: 1px solid black;}
         tr:nth-child(2n) { background-color: #cdcdcd;}
-        form input[type="submit"] {
+        input[type="submit"] {
             padding: 0.5em 1em;
             border: 1px solid #b8e7e2;
             border-radius: 0.5em;
@@ -51,9 +51,9 @@
 
             <br>
 
-            <form action="/form.html">
-                <input type="submit" value="Add Patient">
-            </form>
+            
+            <input type="submit" value="Add Patient" onclick="window.location = 'form.html'">
+            
         </div>
     </main>
 
