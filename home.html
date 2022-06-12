@@ -50,7 +50,6 @@
             </table>
 
             <br>
-
             
             <input type="submit" value="Add Patient" onclick="window.location = 'form.html'">
             
@@ -69,6 +68,13 @@
             let patientsData = localStorage.getItem(storageKey);
             let patients = patientsData ? JSON.parse(patientsData) : [];
             let $patientsTable = document.querySelector('#patients-table');
+
+            if (patients.length == 0) {
+                let $tr = document.createElement('tr');
+                $tr.textContent = 'No data available.';
+                $tr.style.backgroundColor = '#fefefe';
+                $patientsTable.appendChild($tr);
+            }
 
             patients.forEach( patient => {
                 let $tr = document.createElement('tr');
