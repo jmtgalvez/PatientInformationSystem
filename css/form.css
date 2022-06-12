@@ -17,6 +17,10 @@ form {
   gap: 1.2em;
 }
 
+form > h2 {
+  grid-column: 1 / -1;
+}
+
 .form-field {
   display: -ms-grid;
   display: grid;
