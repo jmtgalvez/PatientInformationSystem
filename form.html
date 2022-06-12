@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In | Patient Information System</title>
+    <title>Add Patient | Patient Information System</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/form.css">
     <style>
@@ -269,21 +269,6 @@
             patients.push(NEW_PATIENT);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(patients));
             window.location = 'home.html';
-
-            // let incompleteForm = false;
-            // if ($firstname.value == '') {
-            //     $firstname.style.borderColor = 'red';
-            //     incompleteForm = true;
-            // }
-            // if ($lastname.value == '') $lastname.style.borderColor = 'red'; incompleteForm = true;
-            // if ($region.value == '') $region.style.borderColor = 'red';
-            // if ($province.value == '') $province.style.borderColor = 'red';
-            // if ($city.value == '') $city.style.borderColor = 'red';
-            // if ($address.value == '') $address.style.borderColor = 'red';
-            // if ($birthdate.value == '') $birthdate.style.borderColor = 'red';
-            // if ($contact.value == '') $contact.style.borderColor = 'red';
-            // if ($gender.value == '') $gender.style.borderColor = 'red';
-            // if (incompleteForm) error('Please fillup all required fields.');
         }
 
         function resetForm(e) {
